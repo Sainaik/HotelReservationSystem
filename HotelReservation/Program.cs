@@ -1,19 +1,20 @@
 ﻿using HotelReservation;
 using System;
 
-namespace HotelReservationSystem
+namespace HotelReservation
 {
     class Program
     {
         static void Main(string[] args)
         {
             Console.WriteLine("Welcome to Hotel Reservation System!");
-            ManageHotel manageHotel = new ManageHotel();
-            manageHotel.addHotel("LakeWood", 3,110,90, "Regular");
-            manageHotel.addHotel("Bridgewood",4, 160,60, "Regular");
-            manageHotel.addHotel("RidgeWood", 5,220,150, "Regular");
-            manageHotel.cheapestHotel(DateTime.Parse("14/03/2020"), DateTime.Parse("16/03/2020"));
-            manageHotel.RatedHotel(DateTime.Parse("10/11/2020"), DateTime.Parse("20/11/2020"));
+            Customer customer = new Customer(CustomerType.regular);
+            customer.manageHotel.cheapestHotel(DateTime.Parse("09/11/2020"), DateTime.Parse("09/12/2020"));
+            customer.manageHotel.RatedHotel(DateTime.Parse("09/11/2020"), DateTime.Parse("09/12/2020"));
+
+            Customer customer2 = new Customer(CustomerType.reward);
+            customer2.manageHotel.cheapestHotel(DateTime.Parse("09/11/2020"), DateTime.Parse("09/12/2020"));
+            customer2.manageHotel.RatedHotel(DateTime.Parse("09/11/2020"), DateTime.Parse("09/12/2020"));
         }
     }
 }
