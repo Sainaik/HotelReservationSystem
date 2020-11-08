@@ -13,7 +13,7 @@ namespace HotelReservationSystem
             manageHotel.addHotel("Bridgewood",4, 160,60, "Regular");
             manageHotel.addHotel("RidgeWood", 5,220,150, "Regular");
             manageHotel.cheapestHotel(DateTime.Parse("14/03/2020"), DateTime.Parse("16/03/2020"));
-
+            manageHotel.RatedHotel(DateTime.Parse("10/11/2020"), DateTime.Parse("20/11/2020"));
         }
     }
 }

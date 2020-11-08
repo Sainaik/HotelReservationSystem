@@ -54,8 +54,47 @@ namespace HotelReservation
             Console.WriteLine("\nAvailable Cheap Hotels : ");
             foreach (var record in records.Take(1))
             {
-                Console.WriteLine("\nHotel: " + record.Key.HotelName + "\n  -->Rating: " + record.Key.Rating + "\n  -->Total Rate: " + mapHotelToTotalRate[record.Key]);
+                Console.WriteLine("\nHotel: " + record.Key.HotelName + "\nRating: " + record.Key.Rating + "\nTotal Rate: " + mapHotelToTotalRate[record.Key]);
             }
+        }
+
+
+        public void RatedHotel(DateTime checkInDate, DateTime checkOutDate)
+        {
+            //Finding hotel rate for each hotel between specified dates and finally printing max of them
+
+            Dictionary<Hotel, double> mapHotelToTotalRate = new Dictionary<Hotel, double>();
+
+            foreach (Hotel hotel in hotelDictionary.Values)
+            {
+                double hotelRate = 0;
+                DateTime dateIterator = checkInDate;
+
+                while (checkOutDate >= dateIterator)
+                {
+                    string day = dateIterator.DayOfWeek.ToString();
+
+                    hotelRate += (day.Equals("Saturday")) ? hotel.WeekEndRate : hotel.WeekDayRate;
+
+                    dateIterator = dateIterator.AddDays(1);
+                }
+
+                mapHotelToTotalRate.Add(hotel, hotelRate);
+            }
+
+            var maxValue = mapHotelToTotalRate.Values.Max();
+
+            var records = from hotel in mapHotelToTotalRate
+                          where hotel.Value == maxValue
+                          orderby hotel.Key.Rating descending
+                          select hotel;
+
+            Console.WriteLine("\nAvailable Rated Hotels : ");
+            foreach (var record in records.Take(1))
+            {
+                Console.WriteLine("\nHotel : " + record.Key.HotelName + "\nRating : " + record.Key.Rating + "\nTotal Rate : " + mapHotelToTotalRate[record.Key]);
+            }
+
         }
 
 
