@@ -8,10 +8,11 @@ namespace HotelReservation
     public class ManageHotel
     {
         Dictionary<string, Hotel> hotelDictionary = new Dictionary<string, Hotel>();
-        public void addHotel(string hotelName, double weekDayRate, double weekEndRate, string customerType)
+        public void addHotel(string hotelName, double rating, double weekDayRate, double weekEndRate, string customerType)
         {
             Hotel hotel = new Hotel();
             hotel.HotelName = hotelName;
+            hotel.Rating = rating;
             hotel.WeekDayRate = weekDayRate;
             hotel.WeekEndRate = weekEndRate;
             hotel.CustomerType = customerType;

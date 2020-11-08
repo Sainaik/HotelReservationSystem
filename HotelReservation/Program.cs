@@ -9,9 +9,9 @@ namespace HotelReservationSystem
         {
             Console.WriteLine("Welcome to Hotel Reservation System!");
             ManageHotel manageHotel = new ManageHotel();
-            manageHotel.addHotel("LakeWood", 110,90, "Regular");
-            manageHotel.addHotel("Bridgewood", 160,60, "Regular");
-            manageHotel.addHotel("RidgeWood", 220,150, "Regular");
+            manageHotel.addHotel("LakeWood", 3,110,90, "Regular");
+            manageHotel.addHotel("Bridgewood",4, 160,60, "Regular");
+            manageHotel.addHotel("RidgeWood", 5,220,150, "Regular");
             manageHotel.cheapestHotel(DateTime.Parse("14/03/2020"), DateTime.Parse("16/03/2020"));
 
         }
