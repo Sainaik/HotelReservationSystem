@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 
 namespace HotelReservation
 {
@@ -19,23 +20,39 @@ namespace HotelReservation
         }
 
 
-        public void cheapestHotel(DateTime date1, DateTime date2)
+        public void cheapestHotel(DateTime checkInDate, DateTime checkOutDate)
         {
-            double minRate = 0;
-            double hotelRate;
-            int numberOfDays = (date2 - date1).Days;
-            Hotel hotelWithMinimumRate = null;
+            Dictionary<Hotel, double> mapHotelToTotalRate = new Dictionary<Hotel, double>();
 
             foreach (Hotel hotel in hotelDictionary.Values)
             {
-                hotelRate = numberOfDays * hotel.WeekDayRate;
-                if (minRate == 0 || minRate > hotelRate)
+                double hotelRate = 0;
+                DateTime dateIterator = checkInDate;
+
+                while (checkOutDate >= dateIterator)
                 {
-                    minRate = hotelRate;
-                    hotelWithMinimumRate = hotel;
+                    string day = dateIterator.DayOfWeek.ToString();
+
+                    hotelRate += (day.Equals("Saturday")) ? hotel.WeekEndRate : hotel.WeekDayRate;
+
+                    dateIterator = dateIterator.AddDays(1);
                 }
+
+                mapHotelToTotalRate.Add(hotel, hotelRate);
             }
-            Console.WriteLine($"\nCheapest Hotel { hotelWithMinimumRate.HotelName} having Total Rate : {hotelWithMinimumRate.WeekDayRate * numberOfDays} ");
+
+            var minValue = mapHotelToTotalRate.Values.Min();
+
+
+            var records = from hotel in mapHotelToTotalRate
+                          where hotel.Value == minValue
+                          select hotel;
+
+            Console.WriteLine("\n\nAvailable Cheap Hotels : ");
+            foreach (var record in records)
+            {
+                Console.WriteLine("Hotel : " + record.Key.HotelName + "-->Total Rate : " + mapHotelToTotalRate[record.Key]);
+            }
         }
 
     }

@@ -25,6 +25,7 @@ namespace HotelReservation
             this.WeekDayRate = weekDayRate;
             this.WeekEndRate = weekendRate;
             this.Rating = rating;
+
         }
     }
 }
