@@ -23,6 +23,7 @@ namespace HotelReservation
 
         public void cheapestHotel(DateTime checkInDate, DateTime checkOutDate)
         {
+
             Dictionary<Hotel, double> mapHotelToTotalRate = new Dictionary<Hotel, double>();
 
             foreach (Hotel hotel in hotelDictionary.Values)
@@ -47,14 +48,17 @@ namespace HotelReservation
 
             var records = from hotel in mapHotelToTotalRate
                           where hotel.Value == minValue
+                          orderby hotel.Key.Rating descending
                           select hotel;
 
-            Console.WriteLine("\n\nAvailable Cheap Hotels : ");
-            foreach (var record in records)
+            Console.WriteLine("\nAvailable Cheap Hotels : ");
+            foreach (var record in records.Take(1))
             {
-                Console.WriteLine("Hotel : " + record.Key.HotelName + "-->Total Rate : " + mapHotelToTotalRate[record.Key]);
+                Console.WriteLine("\nHotel: " + record.Key.HotelName + "\n  -->Rating: " + record.Key.Rating + "\n  -->Total Rate: " + mapHotelToTotalRate[record.Key]);
             }
         }
+
+
 
     }
 }
