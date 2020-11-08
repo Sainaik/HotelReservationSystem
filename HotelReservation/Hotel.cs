@@ -9,7 +9,9 @@ namespace HotelReservation
 
         public string HotelName { get; set; }
         public double Rating { get; set; } 
-        public double Rate { get; set; } 
+        public double WeekDayRate { get; set; }
+        public double WeekEndRate { get; set; }
+
         public string CustomerType { get; set; }
 
 
@@ -17,10 +19,11 @@ namespace HotelReservation
         {
 
         }
-        public Hotel(string name, double rating, double rate)
+        public Hotel(string name, double rating, double weekDayRate, double weekendRate)
         {
             this.HotelName = name;
-            this.Rate = rate;
+            this.WeekDayRate = weekDayRate;
+            this.WeekEndRate = weekendRate;
             this.Rating = rating;
         }
     }

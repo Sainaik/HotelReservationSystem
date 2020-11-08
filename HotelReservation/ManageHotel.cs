@@ -7,11 +7,12 @@ namespace HotelReservation
     public class ManageHotel
     {
         Dictionary<string, Hotel> hotelDictionary = new Dictionary<string, Hotel>();
-        public void addHotel(string hotelName, double rate, string customerType)
+        public void addHotel(string hotelName, double weekDayRate, double weekEndRate, string customerType)
         {
             Hotel hotel = new Hotel();
             hotel.HotelName = hotelName;
-            hotel.Rate = rate;
+            hotel.WeekDayRate = weekDayRate;
+            hotel.WeekEndRate = weekEndRate;
             hotel.CustomerType = customerType;
             Console.WriteLine($"Hotel {hotelName} added  successfully");
             hotelDictionary.Add(hotelName, hotel);
@@ -27,14 +28,14 @@ namespace HotelReservation
 
             foreach (Hotel hotel in hotelDictionary.Values)
             {
-                hotelRate = numberOfDays * hotel.Rate;
+                hotelRate = numberOfDays * hotel.WeekDayRate;
                 if (minRate == 0 || minRate > hotelRate)
                 {
                     minRate = hotelRate;
                     hotelWithMinimumRate = hotel;
                 }
             }
-            Console.WriteLine(hotelWithMinimumRate.HotelName + ", Total Rate : " + hotelWithMinimumRate.Rate * numberOfDays);
+            Console.WriteLine($"\nCheapest Hotel { hotelWithMinimumRate.HotelName} having Total Rate : {hotelWithMinimumRate.WeekDayRate * numberOfDays} ");
         }
 
     }
