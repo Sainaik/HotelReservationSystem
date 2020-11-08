@@ -20,8 +20,8 @@ namespace HotelReservation
         public Hotel(string name, double rating, double rate)
         {
             this.HotelName = name;
-            this.rate = rate;
-            this.rating = rating;
+            this.Rate = rate;
+            this.Rating = rating;
         }
     }
 }
